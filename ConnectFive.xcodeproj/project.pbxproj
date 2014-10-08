@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		93E9090B19E4AD61004FDB9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9090A19E4AD61004FDB9E /* AppDelegate.swift */; };
-		93E9090D19E4AD61004FDB9E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 93E9090C19E4AD61004FDB9E /* GameScene.sks */; };
 		93E9090F19E4AD61004FDB9E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9090E19E4AD61004FDB9E /* GameScene.swift */; };
 		93E9091119E4AD61004FDB9E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9091019E4AD61004FDB9E /* GameViewController.swift */; };
 		93E9091419E4AD61004FDB9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E9091219E4AD61004FDB9E /* Main.storyboard */; };
 		93E9091619E4AD61004FDB9E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93E9091519E4AD61004FDB9E /* Images.xcassets */; };
 		93E9091919E4AD61004FDB9E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E9091719E4AD61004FDB9E /* LaunchScreen.xib */; };
 		93E9092519E4AD61004FDB9E /* ConnectFiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9092419E4AD61004FDB9E /* ConnectFiveTests.swift */; };
+		93E9092F19E4AE62004FDB9E /* spheres.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93E9092E19E4AE62004FDB9E /* spheres.atlas */; };
+		93E9093119E4D895004FDB9E /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9093019E4D895004FDB9E /* Sphere.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +32,6 @@
 		93E9090519E4AD60004FDB9E /* ConnectFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E9090919E4AD60004FDB9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93E9090A19E4AD61004FDB9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		93E9090C19E4AD61004FDB9E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		93E9090E19E4AD61004FDB9E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		93E9091019E4AD61004FDB9E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		93E9091319E4AD61004FDB9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,6 +40,8 @@
 		93E9091E19E4AD61004FDB9E /* ConnectFiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConnectFiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E9092319E4AD61004FDB9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93E9092419E4AD61004FDB9E /* ConnectFiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFiveTests.swift; sourceTree = "<group>"; };
+		93E9092E19E4AE62004FDB9E /* spheres.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = spheres.atlas; sourceTree = "<group>"; };
+		93E9093019E4D895004FDB9E /* Sphere.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +83,15 @@
 		93E9090719E4AD60004FDB9E /* ConnectFive */ = {
 			isa = PBXGroup;
 			children = (
+				93E9092E19E4AE62004FDB9E /* spheres.atlas */,
 				93E9090A19E4AD61004FDB9E /* AppDelegate.swift */,
-				93E9090C19E4AD61004FDB9E /* GameScene.sks */,
 				93E9090E19E4AD61004FDB9E /* GameScene.swift */,
 				93E9091019E4AD61004FDB9E /* GameViewController.swift */,
 				93E9091219E4AD61004FDB9E /* Main.storyboard */,
 				93E9091519E4AD61004FDB9E /* Images.xcassets */,
 				93E9091719E4AD61004FDB9E /* LaunchScreen.xib */,
 				93E9090819E4AD60004FDB9E /* Supporting Files */,
+				93E9093019E4D895004FDB9E /* Sphere.swift */,
 			);
 			path = ConnectFive;
 			sourceTree = "<group>";
@@ -200,7 +203,7 @@
 			files = (
 				93E9091919E4AD61004FDB9E /* LaunchScreen.xib in Resources */,
 				93E9091619E4AD61004FDB9E /* Images.xcassets in Resources */,
-				93E9090D19E4AD61004FDB9E /* GameScene.sks in Resources */,
+				93E9092F19E4AE62004FDB9E /* spheres.atlas in Resources */,
 				93E9091419E4AD61004FDB9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +224,7 @@
 			files = (
 				93E9090F19E4AD61004FDB9E /* GameScene.swift in Sources */,
 				93E9091119E4AD61004FDB9E /* GameViewController.swift in Sources */,
+				93E9093119E4D895004FDB9E /* Sphere.swift in Sources */,
 				93E9090B19E4AD61004FDB9E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
