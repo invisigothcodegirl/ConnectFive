@@ -86,6 +86,11 @@ class GameScene: SKScene {
         }
     }
     
+    func checkWins(column : Int) {
+        println("Check for Wins!")
+        println(column)
+    }
+    
     func shuffleBottomSpheresLeft() {
         
         let Duration : NSTimeInterval = 0.1
@@ -149,7 +154,7 @@ class GameScene: SKScene {
                     //Move to the top most row
                     
                     s.row = r
-                    s.sprite?.runAction(move)
+                    s.sprite?.runAction(SKAction.sequence([move, SKAction.runBlock({self.checkWins(column)})]))
                     //Take out of bottom array
                     topSpheres[r][column] = s
                     bottomRowSpheres[column] = nil
