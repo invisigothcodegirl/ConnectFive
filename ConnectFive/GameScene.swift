@@ -236,7 +236,7 @@ class GameScene: SKScene {
                 if let r = getNextAvailableRowIn(column) {
                     let move = SKAction.moveTo(getTilePosition(r, col: column), duration: Duration)
                     //Move to the top most row
-                    
+                    //another comment
                     s.row = r
                     //Take out of bottom array
                     topSpheres[r][column] = s
