@@ -47,7 +47,7 @@ class GameScene: SKScene {
             SKAction.repeatActionForever(
                 SKAction.sequence([
                     SKAction.runBlock(addBottomSphere),
-                    SKAction.waitForDuration(1.0)])
+                    SKAction.waitForDuration(0.5)])
             ))
 
       
@@ -130,6 +130,7 @@ class GameScene: SKScene {
         
         if(leftTot + rightTot > 3) {
             println("5 in a row!!!")
+            dissolveMatchingSpheres(column, row: row)
         }
         
         //Check for vertical wins
@@ -149,30 +150,16 @@ class GameScene: SKScene {
                 }
             }
         }
-        //Probably wont need below
-        
-        //count down
-        /*for var r = row; r > row - 4; r-- {
-            if r > 0 {
-                if let sphere1 = topSpheres[r][column]?.sphereType {
-                    if let sphere2 = topSpheres[r-1][column]?.sphereType {
-                        
-                        if sphere1 == sphere2 {
-                            downTot++
-                            println("They match up ")
-                        }
-                        else { break }
-                    }
-                    
-                }
-            }
-        }*/
+
         
         if(upTot + downTot > 3) {
             println("5 in a row!!!")
+            dissolveMatchingSpheres(column, row: row)
         }
         
     }
+    
+    
     
     func shuffleBottomSpheresLeft() {
         
@@ -185,7 +172,6 @@ class GameScene: SKScene {
                     s.column--
                     bottomRowSpheres[col] = s
                     
-                    //s.sprite?.position = getTilePosition(s.row, col: s.column)
                     let move = SKAction.moveTo(getTilePosition(s.row, col: s.column), duration:Duration)
                     
                     s.sprite?.runAction(move)
@@ -195,6 +181,96 @@ class GameScene: SKScene {
         }
     }
     
+    
+    func dissolveMatchingSpheres(column: Int, row: Int)
+    {
+        let Duration : NSTimeInterval = 0.2
+        //dissolve left
+        var c : Int = column;
+        if c > 0 {
+            while topSpheres[row][c - 1] != nil
+               && topSpheres[row][c]?.sphereType == topSpheres[row][c - 1]?.sphereType
+            {
+                c--
+                if c <= 0 { break }
+            }
+        }
+        for var c1 = c; c1 < column; c1++
+        {
+            let fadeOut = SKAction.fadeOutWithDuration(Duration)
+            topSpheres[row][c1]?.sprite?.runAction(fadeOut)
+            topSpheres[row][c1] = nil
+        }
+        
+        //dissolve right
+        c = column
+        if c < NumCols - 1 {
+            while topSpheres[row][c+1] != nil &&
+                  topSpheres[row][c]?.sphereType == topSpheres[row][c+1]?.sphereType
+            {
+                c++
+                if c >= NumCols - 1 { break }
+            }
+        }
+        for var c1 = c; c1 > column; c1--
+        {
+            let fadeOut = SKAction.fadeOutWithDuration(Duration)
+            topSpheres[row][c1]?.sprite?.runAction(fadeOut)
+            topSpheres[row][c1] = nil
+        }
+        
+        //dissolve up
+        var r : Int = row
+        if r < NumRows - 1 {
+            while topSpheres[r+1][column] != nil &&
+                  topSpheres[r][column]?.sphereType == topSpheres[r+1][column]?.sphereType
+            {
+                r++
+                if r >= (NumRows - 1) {
+                    break
+                }
+            }
+        }
+        for var r1 = r; r1 > row; r1--
+        {
+            let fadeOut = SKAction.fadeOutWithDuration(Duration)
+            topSpheres[r1][column]?.sprite?.runAction(fadeOut)
+            topSpheres[r1][column] = nil
+        }
+        
+        //fade out winning sphere
+        let fadeOut = SKAction.fadeOutWithDuration(Duration)
+        topSpheres[row][column]?.sprite?.runAction(fadeOut)
+        topSpheres[row][column] = nil
+        
+        shuffleSpheresUp()
+    }
+    
+    func shuffleSpheresUp() {
+        
+        for var col = 0; col < NumCols; col++ {
+            //A selection sort type of shuffle
+            var madeSwap : Bool = true
+            while madeSwap  {
+                madeSwap = false;
+                //from the top down if there is a gap, move sphere's down
+                for(var row = NumRows - 1; row > 1; row--)
+                {
+                    if topSpheres[row][col] == nil && topSpheres[row-1][col] != nil {
+                        let move = SKAction.moveTo(getTilePosition(row, col: col), duration: 0.2)
+                        topSpheres[row-1][col]?.sprite?.runAction(move)
+                        topSpheres[row][col]=topSpheres[row-1][col]
+                        topSpheres[row-1][col]=nil
+                        madeSwap = true
+                    }
+                    
+                }
+             }
+            
+        }
+        
+        
+}
     
     
     func addTiles () {
@@ -269,16 +345,9 @@ class GameScene: SKScene {
     
     func getNextAvailableRowIn(column : Int) -> Int?
     {
-        for var row = NumRows - 1; row > 0; row-- {
-            //println("row and column")
-            //println(row)
-            //println(column)
-            if let s = topSpheres[row][column]
-            {
-                
-            }
-            else
-            {
+       for var row = NumRows - 1; row > 0; row-- {
+            if topSpheres[row][column] == nil {
+           
                 return row
             }
         }
